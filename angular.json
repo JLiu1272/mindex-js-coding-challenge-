@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "mindex"
+  "defaultProject": "mindex",
+  "cli": {
+    "analytics": "a8f42cf6-ce40-421e-a548-6eeffb4d4225"
+  }
 }
