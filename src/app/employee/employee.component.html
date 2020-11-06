@@ -6,6 +6,14 @@
     <div mat-subheader>Direct Reports:</div>
     <mat-list-item *ngFor="let employee of employeeDetails">
       {{employee.firstName}} {{employee.lastName}}, {{employee.position}}
+      <span class="employee-action">
+        <button mat-icon-button>
+          <mat-icon class="mat-24">delete</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon class="mat-24">edit</mat-icon>
+        </button>
+      </span>
     </mat-list-item>
   </mat-list>
 </div>

@@ -4,3 +4,12 @@ h4 {
     font-family: 'Roboto';
 }
 
+.mat-list-base .mat-list-item .mat-list-item-content {
+    padding: 0px !important
+}
+
+.employee-action {
+    position: absolute;
+    right: 10px;
+}
+
