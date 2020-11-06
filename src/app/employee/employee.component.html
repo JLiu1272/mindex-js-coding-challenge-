@@ -3,15 +3,15 @@
   <p>Employee ID: {{employee.id}} Direct Reports: {{totalDirectReports(employee.directReports)}}</p>
   <hr />
   <mat-list>
-    <div mat-subheader>Direct Reports:</div>
-    <mat-list-item *ngFor="let employee of employeeDetails">
+    <div mat-subheader class="direct-report-header">Direct Reports:</div>
+    <mat-list-item *ngFor="let employee of employeeDetails" class="direct-report-list-content">
       {{employee.firstName}} {{employee.lastName}}, {{employee.position}}
       <span class="employee-action">
         <button mat-icon-button>
-          <mat-icon class="mat-24">delete</mat-icon>
+          <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button>
-          <mat-icon class="mat-24">edit</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
       </span>
     </mat-list-item>

@@ -4,12 +4,17 @@ h4 {
     font-family: 'Roboto';
 }
 
-.mat-list-base .mat-list-item .mat-list-item-content {
-    padding: 0px !important
+.direct-report-list-content{
+    background-color: #e0e0e0;
 }
 
 .employee-action {
     position: absolute;
     right: 10px;
+}
+
+.direct-report-header {
+    background-color: #7e848c;
+    color: white;
 }
 
