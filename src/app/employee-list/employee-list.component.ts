@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {catchError, map, reduce} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { catchError, map, reduce } from 'rxjs/operators';
 
-import {Employee} from '../employee';
-import {EmployeeService} from '../employee.service';
+import { Employee } from '../employee';
+import { Message } from '../message';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -12,8 +13,14 @@ import {EmployeeService} from '../employee.service';
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
   errorMessage: string;
+  message: Message = { id: 0, operation: "delete" };
 
   constructor(private employeeService: EmployeeService) {
+  }
+
+  onNotifyClicked(message: Message): void {
+    console.log("User clicking");
+    this.message = message;
   }
 
   ngOnInit(): void {

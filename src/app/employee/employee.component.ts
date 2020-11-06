@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Employee } from '../employee';
+import { Message } from '../message';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeComponent {
   @Input() employee: Employee;
   employeeDetails: Employee[] = [];
+  @Output() notify: EventEmitter<Message> = new EventEmitter<Message>();
 
   constructor(private employeeService: EmployeeService) {
   }
@@ -25,6 +27,22 @@ export class EmployeeComponent {
         id => this.employeeService.get(id).subscribe(employeeDetail => this.employeeDetails.push(employeeDetail))
       )
     }
+  }
+
+  delete(id: number): void {
+    this.notify.emit({
+      id: id,
+      operation: "delete"
+    })
+    console.log("Delete employee");
+  }
+
+  edit(id: number): void {
+    this.notify.emit({
+      id: id,
+      operation: "edit"
+    })
+    console.log("Edit employee");
   }
 
   totalDirectReports(directReports: Array<number>): number {

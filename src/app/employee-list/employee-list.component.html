@@ -1,3 +1,9 @@
 <div *ngFor="let emp of employees" class="employee-list">
-  <app-employee [employee]="emp"></app-employee>
+  <app-employee [employee]="emp" (notify)="onNotifyClicked($event)"></app-employee>
+</div>
+
+<div>
+  <h1>Parent Title</h1>
+  <p>{{message.id}}</p>
+  <p>{{message.operation}}</p>
 </div>
