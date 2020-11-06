@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Employee } from '../employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee',
@@ -9,8 +10,22 @@ import { Employee } from '../employee';
 })
 export class EmployeeComponent {
   @Input() employee: Employee;
+  employeeDetails: Employee[] = [];
 
-  constructor() {
+  constructor(private employeeService: EmployeeService) {
+  }
+
+  ngOnInit() {
+    this.getEmployeeDetail()
+    console.log(this.employee.directReports);
+  }
+
+  getEmployeeDetail(): void {
+    if (this.employee.directReports) {
+      this.employee.directReports.forEach(
+        id => this.employeeService.get(id).subscribe(employeeDetail => this.employeeDetails.push(employeeDetail))
+      )
+    }
   }
 
   totalDirectReports(directReports: Array<number>): number {
@@ -18,5 +33,4 @@ export class EmployeeComponent {
       ? directReports.reduce((accum, currVal) => accum + currVal)
       : 0
   }
-
 }
