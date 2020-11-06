@@ -17,7 +17,6 @@ export class EmployeeComponent {
 
   ngOnInit() {
     this.getEmployeeDetail()
-    console.log(this.employee.directReports);
   }
 
   getEmployeeDetail(): void {
