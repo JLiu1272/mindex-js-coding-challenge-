@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import {Employee} from '../employee';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-employee',
@@ -12,4 +12,11 @@ export class EmployeeComponent {
 
   constructor() {
   }
+
+  totalDirectReports(directReports: Array<number>): number {
+    return directReports
+      ? directReports.reduce((accum, currVal) => accum + currVal)
+      : 0
+  }
+
 }
