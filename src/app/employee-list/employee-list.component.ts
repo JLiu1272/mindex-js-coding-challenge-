@@ -13,24 +13,24 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
   errorMessage: string;
-  message: Message = { id: 0, operation: "delete" };
+  message: Message = { employee: null, operation: "delete" };
 
   constructor(private employeeService: EmployeeService) {
   }
 
   onNotifyClicked(message: Message): void {
-    var { id, operation } = message
+    var { employee, operation } = message
     if (operation === "delete") {
-      this.deleteEmployee(id)
+      this.deleteEmployee(employee);
     }
   }
 
-  /**
-   * Deletes this employee from employees list 
-   * @param id 
-   */
-  deleteEmployee(id: number): void {
-    this.employees = this.employees.filter(emp => emp.id !== id)
+  deleteEmployee(employee: Employee): void {
+    this.employees = this.employees.filter(emp => emp.id !== employee.id)
+    this.employeeService.remove(employee)
+  }
+
+  editEmployee(emp: Employee): void {
   }
 
   ngOnInit(): void {

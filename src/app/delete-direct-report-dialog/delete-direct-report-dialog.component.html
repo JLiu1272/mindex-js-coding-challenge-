@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>DELETE DIRECT REPORT</h1>
-<div mat-dialog-content *ngIf="employeeDetail !== undefined">
-    Permanently delete direct report {{employeeDetail.firstName}} {{employeeDetail.lastName}}
+<div mat-dialog-content *ngIf="data.employee !== undefined">
+    Permanently delete direct report {{data.employee.firstName}} {{data.employee.lastName}}
     <br />
     This action cannot be undone
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="cancel()">Cancel</button>
-    <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]="confirmDeleteMsg" cdkFocusInitial>Ok</button>
 </div>

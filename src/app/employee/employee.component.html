@@ -7,10 +7,10 @@
     <mat-list-item *ngFor="let employee of employeeDetails" class="direct-report-list-content">
       {{employee.firstName}} {{employee.lastName}}, {{employee.position}}
       <span class="employee-action">
-        <button mat-icon-button (click)="delete(employee.id)">
+        <button mat-icon-button (click)="delete(employee)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button (click)="edit(employee.id)">
+        <button mat-icon-button (click)="edit(employee)">
           <mat-icon>edit</mat-icon>
         </button>
       </span>

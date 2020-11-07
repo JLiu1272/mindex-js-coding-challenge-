@@ -1,4 +1,6 @@
+import { Employee } from "./employee";
+
 export class Message {
-    id: number;
+    employee: Employee;
     operation: string;
 }

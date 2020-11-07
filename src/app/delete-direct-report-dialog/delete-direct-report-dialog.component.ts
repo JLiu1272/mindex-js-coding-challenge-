@@ -5,31 +5,23 @@ import { EmployeeComponent } from '../employee/employee.component';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
-export interface DialogData {
-  animal: string,
-  name: string,
-}
-
 @Component({
   selector: 'app-delete-direct-report-dialog',
   templateUrl: './delete-direct-report-dialog.component.html',
   styleUrls: ['./delete-direct-report-dialog.component.css']
 })
 export class DeleteDirectReportDialogComponent implements OnInit {
-  employeeDetail: Employee;
+  confirmDeleteMsg: string = "ok";
 
   constructor(
-    private employeeService: EmployeeService,
     public dialogRef: MatDialogRef<EmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number }) {
+    @Inject(MAT_DIALOG_DATA) public data: { employee: Employee }) {
   }
 
-
   cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close('cancel');
   }
 
   ngOnInit(): void {
-    this.employeeService.get(this.data.id).subscribe(employeeDetail => this.employeeDetail = employeeDetail)
   }
 }
