@@ -39,11 +39,14 @@ export class EmployeeComponent {
     })
 
     dialogRef.afterClosed().subscribe(result => {
+      // Delete the employee from the direct report
+      this.employeeDetails = this.employeeDetails.filter(emp => emp.id !== id)
+
+      // Notify employee-list that a delete operation is occuring 
       this.notify.emit({
         id: id,
         operation: "delete"
       })
-      console.log("Delete employee");
     })
   }
 

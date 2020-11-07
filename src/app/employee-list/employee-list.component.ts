@@ -19,8 +19,18 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onNotifyClicked(message: Message): void {
-    console.log("User clicking");
-    this.message = message;
+    var { id, operation } = message
+    if (operation === "delete") {
+      this.deleteEmployee(id)
+    }
+  }
+
+  /**
+   * Deletes this employee from employees list 
+   * @param id 
+   */
+  deleteEmployee(id: number): void {
+    this.employees = this.employees.filter(emp => emp.id !== id)
   }
 
   ngOnInit(): void {
