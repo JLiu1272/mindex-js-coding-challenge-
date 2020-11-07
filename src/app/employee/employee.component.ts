@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDirectReportDialogComponent } from '../delete-direct-report-dialog/delete-direct-report-dialog.component';
 
 import { Employee } from '../employee';
 import { Message } from '../message';
@@ -12,16 +14,17 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeComponent {
   @Input() employee: Employee;
   employeeDetails: Employee[] = [];
+  employeeDetail: Employee;
   @Output() notify: EventEmitter<Message> = new EventEmitter<Message>();
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.getEmployeeDetail()
+    this.getEmployeeDetails()
   }
 
-  getEmployeeDetail(): void {
+  getEmployeeDetails(): void {
     if (this.employee.directReports) {
       this.employee.directReports.forEach(
         id => this.employeeService.get(id).subscribe(employeeDetail => this.employeeDetails.push(employeeDetail))
@@ -30,11 +33,18 @@ export class EmployeeComponent {
   }
 
   delete(id: number): void {
-    this.notify.emit({
-      id: id,
-      operation: "delete"
+    const dialogRef = this.dialog.open(DeleteDirectReportDialogComponent, {
+      width: '250px',
+      data: { id: id }
     })
-    console.log("Delete employee");
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.notify.emit({
+        id: id,
+        operation: "delete"
+      })
+      console.log("Delete employee");
+    })
   }
 
   edit(id: number): void {
