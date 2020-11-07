@@ -4,6 +4,9 @@
   <hr />
   <mat-list>
     <div mat-subheader class="direct-report-header">Direct Reports:</div>
+    <mat-list-item *ngIf="employeeDetails.length == 0" class="direct-report-list-content">
+      This employee has no reports.
+    </mat-list-item>
     <mat-list-item *ngFor="let employee of employeeDetails" class="direct-report-list-content">
       {{employee.firstName}} {{employee.lastName}}, {{employee.position}}
       <span class="employee-action">
