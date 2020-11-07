@@ -70,8 +70,6 @@ export class EmployeeComponent {
           employee: result,
           operation: "edit"
         })
-      } else {
-        console.log("User canceled request");
       }
     })
   }
