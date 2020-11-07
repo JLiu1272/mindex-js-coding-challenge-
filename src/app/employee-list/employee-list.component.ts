@@ -31,6 +31,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   editEmployee(emp: Employee): void {
+    this.employees = this.employees.filter(emp => emp.id !== emp.id)
+    this.employees.push(emp)
+    this.employeeService.save(emp)
   }
 
   ngOnInit(): void {

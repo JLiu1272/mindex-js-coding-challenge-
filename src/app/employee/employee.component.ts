@@ -54,10 +54,10 @@ export class EmployeeComponent {
     })
   }
 
-  edit(id: number): void {
+  edit(employee: Employee): void {
     const dialogRef = this.dialog.open(EditCompensationDialogComponent, {
-      width: '250px',
-      data: { id: id }
+      width: '300px',
+      data: { employee: employee }
     })
 
     dialogRef.afterClosed().subscribe(result => {
@@ -66,12 +66,10 @@ export class EmployeeComponent {
       // When a user clicks on a backdrop, the request is considered 
       // to be cancelled. 
       if (result && result !== "cancel") {
-        this.employee.compensation = result;
         this.notify.emit({
-          employee: this.employee,
+          employee: result,
           operation: "edit"
         })
-        console.log(`Employee ${this.employee.id}, Compensation: ${this.employee.compensation}`);
       } else {
         console.log("User canceled request");
       }

@@ -11,12 +11,11 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./edit-compensation-dialog.component.css']
 })
 export class EditCompensationDialogComponent implements OnInit {
-  employeeDetail: Employee;
 
   constructor(
     public employeeService: EmployeeService,
     public dialogRef: MatDialogRef<EmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number }
+    @Inject(MAT_DIALOG_DATA) public data: { employee: Employee }
   ) { }
 
   cancel(): void {
@@ -24,7 +23,6 @@ export class EditCompensationDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.get(this.data.id).subscribe(employeeDetail => this.employeeDetail = employeeDetail)
   }
 
 }
