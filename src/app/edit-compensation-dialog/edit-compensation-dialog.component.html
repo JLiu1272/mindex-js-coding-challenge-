@@ -1,18 +1,18 @@
 <h1 mat-dialog-title>UPDATE COMPENSATION</h1>
 <div mat-dialog-content *ngIf="data.employee !== undefined">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
-        <input matInput [(ngModel)]="data.employee.firstName">
+        <input matInput [(ngModel)]="data.employee.lastName" readonly>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
-        <input matInput [(ngModel)]="data.employee.lastName">
+        <input matInput [(ngModel)]="data.employee.firstName" readonly>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="data.employee.position">
+        <input matInput [(ngModel)]="data.employee.position" readonly>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Compensation</mat-label>
         <input matInput [(ngModel)]="data.employee.compensation">
     </mat-form-field>
