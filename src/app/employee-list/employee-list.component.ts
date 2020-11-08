@@ -20,9 +20,7 @@ export class EmployeeListComponent implements OnInit {
 
   onNotifyClicked(message: Message): void {
     var { employee, operation } = message
-    if (operation === "delete") {
-      this.deleteEmployee(employee);
-    }
+    operation === "delete" ? this.deleteEmployee(employee) : this.editEmployee(employee);
   }
 
   deleteEmployee(employee: Employee): void {
@@ -31,8 +29,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   editEmployee(emp: Employee): void {
-    this.employees = this.employees.filter(emp => emp.id !== emp.id)
-    this.employees.push(emp)
     this.employeeService.save(emp)
   }
 
