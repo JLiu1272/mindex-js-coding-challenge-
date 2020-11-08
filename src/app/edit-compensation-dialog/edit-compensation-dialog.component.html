@@ -17,7 +17,7 @@
         <input matInput [(ngModel)]="data.employee.compensation">
     </mat-form-field>
     <div mat-dialog-actions>
-        <button mat-button (click)="cancel()">Cancel</button>
-        <button mat-button [mat-dialog-close]="data.employee" cdkFocusInitial>Save</button>
+        <button mat-flat-button (click)="cancel()">Cancel</button>
+        <button mat-flat-button [mat-dialog-close]="data.employee" cdkFocusInitial>Save</button>
     </div>
 </div>
