@@ -26,10 +26,16 @@ export class EmployeeListComponent implements OnInit {
   deleteEmployee(employee: Employee): void {
     this.employees = this.employees.filter(emp => emp.id !== employee.id)
     this.employeeService.remove(employee)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      ).subscribe()
   }
 
   editEmployee(emp: Employee): void {
     this.employeeService.save(emp)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      ).subscribe()
   }
 
   ngOnInit(): void {
