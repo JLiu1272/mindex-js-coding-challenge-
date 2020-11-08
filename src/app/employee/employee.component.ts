@@ -47,6 +47,12 @@ export class EmployeeComponent {
         // Delete the employee from the direct report
         this.employeeDetails = this.employeeDetails.filter(emp => emp.id !== employee.id)
 
+        // Update direct reports total count as well when you delete an 
+        // employee
+        this.employee.directReports = this.employee.directReports.filter(empId => empId !== employee.id)
+        this.totalDirectReports = 0;
+        this.calcTotalDirectReports(this.employee.directReports);
+
         // Notify employee-list that a delete operation is occuring 
         this.notify.emit({
           employee: employee,
