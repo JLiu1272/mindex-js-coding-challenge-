@@ -36,7 +36,7 @@ export class EmployeeComponent {
 
   delete(employee: Employee): void {
     const dialogRef = this.dialog.open(DeleteDirectReportDialogComponent, {
-      width: '250px',
+      width: '300px',
       data: { employee: employee }
     })
 
