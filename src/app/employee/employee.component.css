@@ -1,6 +1,9 @@
 h4 {
-    color: blue; 
+    color: #2d80dd; 
     font-size: 20px;
+}
+
+h4, p {
     font-family: 'Roboto';
 }
 
