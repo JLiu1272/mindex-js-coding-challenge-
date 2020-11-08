@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDirectReportDialogComponent } from '../delete-direct-report-dialog/delete-direct-report-dialog.component';
-import { EditCompensationDialogComponent } from '../edit-compensation-dialog/edit-compensation-dialog.component';
+import { EditCompensationDialogComponent } from '../edit-compensation-dialog/edit-compensation-dialog.component'
 
 import { Employee } from '../employee';
 import { Message } from '../message';
@@ -15,13 +15,15 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeComponent {
   @Input() employee: Employee;
   employeeDetails: Employee[] = [];
+  totalDirectReports: number = 0;
   @Output() notify: EventEmitter<Message> = new EventEmitter<Message>();
 
   constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.getEmployeeDetails()
+    this.getEmployeeDetails();
+    this.calcTotalDirectReports(this.employee.directReports);
   }
 
   getEmployeeDetails(): void {
@@ -74,9 +76,18 @@ export class EmployeeComponent {
     })
   }
 
-  totalDirectReports(directReports: Array<number>): number {
-    return directReports
-      ? directReports.reduce((accum, currVal) => accum + currVal)
-      : 0
+  calcTotalDirectReports(directReports: Array<number>): void {
+    // If directReports is showing undefined or that 
+    // directReports is showing length of 0, we do nothing
+    if (directReports === undefined || directReports !== undefined && directReports.length <= 0) {
+      return
+    }
+
+    directReports.forEach(employeeId => {
+      this.employeeService.get(employeeId).subscribe(emp => {
+        this.totalDirectReports += 1;
+        this.calcTotalDirectReports(emp.directReports);
+      });
+    })
   }
 }
