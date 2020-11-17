@@ -1,25 +1,28 @@
-import {async, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
-import {EmployeeComponent} from './employee.component';
+import { EmployeeComponent } from './employee.component';
+import { EmployeeService } from '../employee.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
-@Component({selector: 'app-mat-card', template: ''})
+@Component({ selector: 'app-mat-card', template: '' })
 class CardComponent {
 }
 
-@Component({selector: 'app-mat-card-header', template: ''})
+@Component({ selector: 'app-mat-card-header', template: '' })
 class CardHeaderComponent {
 }
 
-@Component({selector: 'app-mat-card-title', template: ''})
+@Component({ selector: 'app-mat-card-title', template: '' })
 class CardTitleComponent {
 }
 
-@Component({selector: 'app-mat-card-subtitle', template: ''})
+@Component({ selector: 'app-mat-card-subtitle', template: '' })
 class CardSubtitleComponent {
 }
 
-@Component({selector: 'app-mat-card-content', template: ''})
+@Component({ selector: 'app-mat-card-content', template: '' })
 class CardContentComponent {
 }
 
@@ -30,12 +33,16 @@ describe('EmployeeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         EmployeeComponent,
-        CardComponent,
-        CardHeaderComponent,
-        CardTitleComponent,
-        CardSubtitleComponent,
-        CardContentComponent
       ],
+      imports: [
+        MatDialogModule
+      ],
+      // provide the component-under-test and dependent service
+      providers: [
+        EmployeeService,
+        HttpClient,
+        HttpHandler
+      ]
     }).compileComponents();
   }));
 
@@ -51,4 +58,9 @@ describe('EmployeeComponent', () => {
 
     expect(comp).toBeTruthy();
   }));
+
+  // Test #1 - getEmploymentDetails gets the desired result 
+  it('getEmploymentDetails returns desired result', async(() => {
+
+  }))
 });
