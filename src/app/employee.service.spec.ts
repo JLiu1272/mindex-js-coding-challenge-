@@ -25,7 +25,7 @@ describe('EmployeeService', () => {
         expect(employeeService).toBeTruthy();
     });
 
-    it('get(1) should return information about employeeId 1', () => {
+    it('#get(1)', () => {
         const employeeExpectedRes = {
             id: 1,
             firstName: 'Brian',
@@ -34,8 +34,9 @@ describe('EmployeeService', () => {
             directReports: [2, 3],
             compensation: 0,
         }
-        let employeeRecRes;
-        spyOn(employeeService, 'get').and.returnValue(of(employeeExpectedRes));
+
+        let employeeRecRes: Employee;
+        spyOn(employeeService, 'get').and.returnValue(of(employeeExpectedRes))
 
         employeeService.get(1).subscribe(emp => {
             employeeRecRes = emp;
@@ -44,7 +45,7 @@ describe('EmployeeService', () => {
         expect(employeeRecRes).toEqual(employeeExpectedRes);
     })
 
-    it('getAll should return all of the employees', () => {
+    it('#getAll()', () => {
         const rawEmployeeData = [
             {
                 id: 1,
@@ -96,7 +97,7 @@ describe('EmployeeService', () => {
         expect(employeeRecRes).toEqual(rawEmployeeData);
     })
 
-    it('testing save service', () => {
+    it('#save() a new employee should create a new entry', async () => {
 
         // Initialise mock data 
         const employee: Employee = {
@@ -108,13 +109,36 @@ describe('EmployeeService', () => {
             compensation: 0
         }
 
-        spyOn(employeeService, 'save').and.returnValue(of(employee));
+        // Save a new employee
+        let res: Employee;
+        spyOn(employeeService, 'save').and.returnValue(of(employee))
+        employeeService.save(employee).subscribe(emp => res = emp)
+        expect(res).toEqual(employee)
+
+        // Try to retrieve the new employee
+        employeeService.get(5).subscribe(emp => expect(emp).toEqual(employee))
+    })
+
+    it('#save() saving an existing employee should update the employee', () => {
+        // Generate Mock Data
+        let employee: Employee = {
+            id: 1,
+            firstName: 'Brian',
+            lastName: 'McGee',
+            position: 'Vice President',
+            directReports: [2, 3],
+            compensation: 0
+        }
+
+        let updatedPosition: string;
+        spyOn(employeeService, 'save').and.returnValue(of(employee))
 
         // Act
-        let savedEmployee: Employee;
-        employeeService.save(employee).subscribe(emp => savedEmployee = emp);
+        employeeService.save(employee).subscribe(emp => {
+            updatedPosition = emp.position;
+        })
 
         // Assert 
-        expect(savedEmployee).toEqual(employee);
+        expect(updatedPosition).toEqual('Vice President');
     })
 });
