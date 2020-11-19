@@ -4,7 +4,7 @@ import { of, from } from 'rxjs';
 
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee';
-import { flatMap, catchError, map, reduce } from 'rxjs/operators';
+import { flatMap, map, reduce } from 'rxjs/operators';
 
 describe('EmployeeService', () => {
     let employeeService: EmployeeService;
@@ -96,4 +96,25 @@ describe('EmployeeService', () => {
         expect(employeeRecRes).toEqual(rawEmployeeData);
     })
 
+    it('testing save service', () => {
+
+        // Initialise mock data 
+        const employee: Employee = {
+            id: 5,
+            firstName: 'Jennifer',
+            lastName: 'Liu',
+            position: 'Software Engineer',
+            directReports: [2, 3],
+            compensation: 0
+        }
+
+        spyOn(employeeService, 'save').and.returnValue(of(employee));
+
+        // Act
+        let savedEmployee: Employee;
+        employeeService.save(employee).subscribe(emp => savedEmployee = emp);
+
+        // Assert 
+        expect(savedEmployee).toEqual(employee);
+    })
 });
